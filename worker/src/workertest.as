@@ -12,6 +12,9 @@ package
 	[SWF(width="800", height="600", frameRate="60", backgroundColor="#CCCCCC")]
 	public class workertest extends Sprite
 	{
+		//*********************************************************
+		// VARIABLES
+		//*********************************************************
 		private var worker:Worker;
 		private var mainTo:MessageChannel;
 		private var workerTo:MessageChannel;
@@ -19,6 +22,10 @@ package
 		private var ball:Sprite;
 		private var log:TextField;
 		
+		
+		//*********************************************************
+		// PUBLIC METHODS
+		//*********************************************************
 		/**
 		 * constructor 
 		 */		
@@ -26,6 +33,11 @@ package
 		{
 			init();
 		}
+		
+		
+		//*********************************************************
+		// PRIVATE METHODS
+		//*********************************************************
 		
 		/**
 		 * init 
