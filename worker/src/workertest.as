@@ -33,7 +33,6 @@ package
 			addChild(log);
 			log.text = "Worker Test";
 			
-			
 			var time:Number = new Date().time;
 			
 			// single thread
