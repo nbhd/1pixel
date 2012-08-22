@@ -66,7 +66,7 @@ package
 				worker.setSharedProperty("mainTo", mainTo);
 				worker.setSharedProperty("workerTo", workerTo);
 				
-				workerTo.addEventListener(Event.CHANNEL_MESSAGE, onWorkerTo);
+				workerTo.addEventListener(Event.CHANNEL_MESSAGE, workerToHandler);
 				
 				worker.addEventListener(Event.WORKER_STATE, onWorkerEvent);
 				worker.start();
@@ -76,12 +76,12 @@ package
 				mainTo = Worker.current.getSharedProperty("mainTo");
 				workerTo = Worker.current.getSharedProperty("workerTo");
 				
-				mainTo.addEventListener(Event.CHANNEL_MESSAGE, onMainTo);
+				mainTo.addEventListener(Event.CHANNEL_MESSAGE, mainToHandler);
 				hardCostMethod();
 			}
 		}
 		
-		private function onWorkerTo(e:Event):void
+		private function workerToHandler(e:Event):void
 		{
 			if (e.target.messageAvailable == false) return;
 			var message:* = workerTo.receive();
@@ -89,7 +89,7 @@ package
 			log.appendText('\nworker to receive : ' + message);
 		}
 		
-		private function onMainTo(e:Event):void
+		private function mainToHandler(e:Event):void
 		{
 			if (e.target.messageAvailable == false) return;
 			var message:* = mainTo.receive();
