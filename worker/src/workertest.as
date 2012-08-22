@@ -8,9 +8,6 @@ package
 	import flash.system.WorkerState;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFieldType;
-	import flash.utils.setInterval;
-	import flash.utils.setTimeout;
 	
 	[SWF(width="800", height="600", frameRate="60", backgroundColor="#CCCCCC")]
 	public class workertest extends Sprite
