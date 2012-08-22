@@ -68,7 +68,7 @@ package
 				
 				workerTo.addEventListener(Event.CHANNEL_MESSAGE, workerToHandler);
 				
-				worker.addEventListener(Event.WORKER_STATE, onWorkerEvent);
+				worker.addEventListener(Event.WORKER_STATE, workerStateHandler);
 				worker.start();
 			}
 			else
@@ -97,7 +97,7 @@ package
 			workerTo.send(message);
 		}
 		
-		private function onWorkerEvent(e:Event):void
+		private function workerStateHandler(e:Event):void
 		{
 			if (e.target.state == WorkerState.RUNNING)
 			{
