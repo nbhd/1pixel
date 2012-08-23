@@ -9,7 +9,7 @@ package
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	
-	[SWF(width="800", height="600", frameRate="60", backgroundColor="#CCCCCC")]
+	[SWF(width="600", height="440", frameRate="60", backgroundColor="#CCCCCC")]
 	public class workertest extends Sprite
 	{
 		//*********************************************************
@@ -19,8 +19,19 @@ package
 		private var mainTo:MessageChannel;
 		private var workerTo:MessageChannel;
 		
-		private var ball:Sprite;
 		private var log:TextField;
+		private var balls:Array;
+		private var seed:Number = 1;
+		private var container:Sprite;
+		private var fps:TextField;
+		
+		
+		//*********************************************************
+		// CONSTANTS
+		//*********************************************************
+		private const CENTER_X:int = 300;
+		private const CENTER_Y:int = 220;
+		private const MAX_BALL:int = 400;
 		
 		
 		//*********************************************************
@@ -44,9 +55,24 @@ package
 		 */		
 		private function init():void
 		{
+			balls = [];
+			
+			container = new Sprite();
+			container.x = CENTER_X;
+			container.y = CENTER_Y;
+			container.mouseChildren = false;
+			container.mouseEnabled = false;
+			addChild(container);
+			
 			log = createTextField();
-			addChild(log);
 			log.text = "Worker Test";
+			addChild(log);
+			
+			fps = createTextField();
+			fps.text = 'fps : ' + String(stage.frameRate);
+			fps.x = stage.stageWidth - fps.width;
+			fps.y = stage.stageHeight - fps.height;
+			addChild(fps);
 			
 			var time:Number = new Date().time;
 			
@@ -181,12 +207,18 @@ package
 		 */		
 		private function mainMethod():void
 		{
-			ball = new Sprite();
-			ball.graphics.beginFill(0);
-			ball.graphics.drawCircle(0, 0, 20);
-			ball.graphics.endFill();
-			ball.y = int(stage.stageHeight * .5);
-			addChild(ball);
+			var i:int;
+			var ball:Sprite;
+			var fibonacci:Number;
+			for (i = 0; i < MAX_BALL; i++)
+			{
+				ball = createBall();
+				fibonacci = i * 1 * Math.PI * ((1 + Math.sqrt(5)) * .5);
+				ball.x = (Math.cos(fibonacci) * i);
+				ball.y = (Math.sin(fibonacci) * i);
+				container.addChild(ball);
+				balls[i] = ball;
+			}
 			
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler); 
 		}
@@ -197,7 +229,21 @@ package
 		 */		
 		private function enterFrameHandler(e:Event):void
 		{
-			ball.x += 1;
+			var i:int;
+			var ball:Sprite;
+			var fibonacci:Number;
+			seed += 0.00001;
+			
+			for (i = 0; i < MAX_BALL; i++)
+			{
+				ball = balls[i];
+				fibonacci = i * seed * Math.PI * ((1 + Math.sqrt(5)) * .5);
+				ball.x += ((Math.cos(fibonacci) * i) - ball.x) * .5;
+				ball.y += ((Math.sin(fibonacci) * i) - ball.y) * .5;
+			}
+			
+			fps.text = 'fps : ' + String(stage.frameRate);
+			fps.x = stage.stageWidth - fps.width;
 		}
 		
 		/**
@@ -232,8 +278,22 @@ package
 			textField.selectable = false;
 			textField.mouseEnabled = false;
 			textField.autoSize = TextFieldAutoSize.LEFT;
+			textField.background = true;
 			
 			return textField;
+		}
+		
+		/**
+		 * ball 生成 
+		 */		
+		private function createBall():Sprite
+		{
+			var ball:Sprite = new Sprite();
+			ball.graphics.beginFill(0, .5);
+			ball.graphics.drawCircle(0, 0, 20);
+			ball.graphics.endFill();;
+			
+			return ball;
 		}
 	}
 }
