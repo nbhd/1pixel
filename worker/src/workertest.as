@@ -108,11 +108,11 @@ package
 			// main worker
 			if (Worker.current.isPrimordial)
 			{
+				// メイン処理
+				mainMethod();
+				
 				// sub worker
 				worker = WorkerDomain.current.createWorker(loaderInfo.bytes);
-				
-				// 描画処理
-				mainMethod();
 				
 				// worker 間通信用チャンネル
 				mainTo = Worker.current.createMessageChannel(worker);
