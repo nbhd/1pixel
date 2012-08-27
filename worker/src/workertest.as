@@ -32,6 +32,7 @@ package
 		private const CENTER_X:int = 300;
 		private const CENTER_Y:int = 220;
 		private const MAX_BALL:int = 400;
+		private const HARDCOST_LOOP:int = 100000000;
 		
 		
 		//*********************************************************
@@ -258,7 +259,7 @@ package
 			
 			var n:int = 0;
 			var i:int
-			for (i = 0; i < 100000000; i++)
+			for (i = 0; i < HARDCOST_LOOP; i++)
 			{
 				n = i;
 			}
@@ -291,7 +292,7 @@ package
 			var ball:Sprite = new Sprite();
 			ball.graphics.beginFill(0, .5);
 			ball.graphics.drawCircle(0, 0, 20);
-			ball.graphics.endFill();;
+			ball.graphics.endFill();
 			
 			return ball;
 		}
