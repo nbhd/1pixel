@@ -75,7 +75,7 @@ package
 			addChild(log);
 			
 			fps = createTextField();
-			fps.text = 'fps : ' + String(frameRate + ' / ' + stage.frameRate);
+			fps.text = 'fps : ' + String(stage.frameRate + ' / ' + stage.frameRate);
 			fps.x = stage.stageWidth - fps.width;
 			fps.y = stage.stageHeight - fps.height;
 			addChild(fps);
