@@ -126,7 +126,7 @@ package
 				// message 受信イベントハンドラ (sub worker -> main worker)
 				workerTo.addEventListener(Event.CHANNEL_MESSAGE, workerToHandler);
 				
-				// state event handler
+				// state event
 				worker.addEventListener(Event.WORKER_STATE, workerStateHandler);
 				
 				// worker 処理開始
