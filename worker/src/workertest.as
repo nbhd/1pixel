@@ -210,13 +210,13 @@ package
 		{
 			var i:int;
 			var ball:Sprite;
-			var fibonacci:Number;
+			var radian:Number;
 			for (i = 0; i < MAX_BALL; i++)
 			{
 				ball = createBall();
-				fibonacci = i * 1 * Math.PI * ((1 + Math.sqrt(5)) * .5);
-				ball.x = (Math.cos(fibonacci) * i);
-				ball.y = (Math.sin(fibonacci) * i);
+				radian = i * 1 * Math.PI * ((1 + Math.sqrt(5)) * .5);
+				ball.x = (Math.cos(radian) * i);
+				ball.y = (Math.sin(radian) * i);
 				container.addChild(ball);
 				balls[i] = ball;
 			}
@@ -232,15 +232,15 @@ package
 		{
 			var i:int;
 			var ball:Sprite;
-			var fibonacci:Number;
+			var radian:Number;
 			seed += 0.00001;
 			
 			for (i = 0; i < MAX_BALL; i++)
 			{
 				ball = balls[i];
-				fibonacci = i * seed * Math.PI * ((1 + Math.sqrt(5)) * .5);
-				ball.x += ((Math.cos(fibonacci) * i) - ball.x) * .5;
-				ball.y += ((Math.sin(fibonacci) * i) - ball.y) * .5;
+				radian = i * seed * Math.PI * ((1 + Math.sqrt(5)) * .5);
+				ball.x += ((Math.cos(radian) * i) - ball.x) * .5;
+				ball.y += ((Math.sin(radian) * i) - ball.y) * .5;
 			}
 			
 			fps.text = 'fps : ' + String(stage.frameRate);
