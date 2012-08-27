@@ -2,6 +2,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.filters.BlurFilter;
 	import flash.system.MessageChannel;
 	import flash.system.Worker;
 	import flash.system.WorkerDomain;
@@ -24,6 +25,8 @@ package
 		private var seed:Number = 1;
 		private var container:Sprite;
 		private var fps:TextField;
+		private var frameRate:int;
+		private var frameRateCheckTime:Number;
 		
 		
 		//*********************************************************
@@ -56,6 +59,8 @@ package
 		 */		
 		private function init():void
 		{
+			frameRateCheckTime = new Date().time;
+			
 			balls = [];
 			
 			container = new Sprite();
@@ -70,7 +75,7 @@ package
 			addChild(log);
 			
 			fps = createTextField();
-			fps.text = 'fps : ' + String(stage.frameRate);
+			fps.text = 'fps : ' + String(frameRate + ' / ' + stage.frameRate);
 			fps.x = stage.stageWidth - fps.width;
 			fps.y = stage.stageHeight - fps.height;
 			addChild(fps);
@@ -243,8 +248,15 @@ package
 				ball.y += ((Math.sin(radian) * i) - ball.y) * .5;
 			}
 			
-			fps.text = 'fps : ' + String(stage.frameRate);
-			fps.x = stage.stageWidth - fps.width;
+			frameRate++;
+			
+			if (new Date().time - frameRateCheckTime > 1000)
+			{
+				fps.text = 'fps : ' + String(frameRate + ' / ' + stage.frameRate);
+				fps.x = stage.stageWidth - fps.width;
+				frameRate = 0;
+				frameRateCheckTime = new Date().time;
+			}
 		}
 		
 		/**
