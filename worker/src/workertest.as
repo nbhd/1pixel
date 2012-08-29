@@ -269,7 +269,7 @@ package
 			var time:Number = new Date().time;
 			
 			var n:int = 0;
-			var i:int
+			var i:int;
 			for (i = 0; i < HARDCOST_LOOP; i++)
 			{
 				n = i;
